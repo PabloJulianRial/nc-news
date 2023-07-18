@@ -6,7 +6,7 @@ const ArticlePreview = ({article}) =>{
         <p>Topic: {article.topic}</p>
         <p>Author: {article.author}</p>
         <p>Posted on: {article.created_at.slice(0, 10)}</p>
-        <img src={article.article_img_url} alt="" />
+        <img src={article.article_img_url} alt="Article picture" />
         
       </article>
     )
