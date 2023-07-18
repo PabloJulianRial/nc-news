@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export function ArticleDetails({ article }) {
 
   return (
@@ -8,6 +10,9 @@ export function ArticleDetails({ article }) {
       <p>Votes: {article.votes}</p>
       <p>Author: {article.author}</p>
       <p>Topic: {article.topic}</p>
+      <Link className="comments-link" to={`/articles/${article.article_id}/comments`}>
+        All comments
+      </Link>
     </section>
   );
 }
