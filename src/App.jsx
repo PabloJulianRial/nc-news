@@ -11,23 +11,32 @@ import { getTopics } from "./utils";
 function App() {
   const [allArticles, setAllArticles] = useState([])
   const [allTopics, setAllTopics] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
+  const [isError, setIsError] = useState(false)
 
   useEffect(() => {
     getArticles().then((response) => {
-      console.log(response)
-      setAllArticles(response);
-    });
-    
-  }, []);
+      setAllArticles(response)
+      setIsLoading(false)
+    }).catch((err) =>{
+        setIsError(true)
+    })
+}, []);
   useEffect(() => {
     getTopics().then((response) => {
-      console.log(response)
       setAllTopics(response);
     });
     
   }, []);
 
-  
+  if (isError) {
+    return <p className='error'>Error</p>
+}
+
+else if (isLoading) {
+    return <p className='loading'>Loading...</p> 
+}
+else
 
 
   return (
@@ -35,7 +44,7 @@ function App() {
      <Header />
      <Routes>
      <Route
-          path="/articles"
+          path="/"
           element={<ArticlesList 
             allArticles={allArticles} allTopics={allTopics}/>}
         />
