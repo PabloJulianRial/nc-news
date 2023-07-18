@@ -19,3 +19,7 @@
 }
 select { min-height: 20px;
 min-width:150px }
+.article-item img{
+  width: 200px;
+  height: auto;
+}

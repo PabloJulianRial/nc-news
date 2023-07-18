@@ -4,7 +4,7 @@ import Header from '../src/components/Header'
 import ArticlesList from './components/ArticlesList'
 import { Route, Routes } from "react-router-dom";
 import { getArticles } from "./utils";
-import { getTopics } from "./utils";
+
 
 
 
@@ -22,12 +22,7 @@ function App() {
         setIsError(true)
     })
 }, []);
-  useEffect(() => {
-    getTopics().then((response) => {
-      setAllTopics(response);
-    });
-    
-  }, []);
+  
 
   if (isError) {
     return <p className='error'>Error</p>
