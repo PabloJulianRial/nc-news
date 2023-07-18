@@ -5,19 +5,23 @@ import { ArticleDetails } from "./ArticleDetails";
 
 function FullArticle() {
   const { article_id } = useParams();
-  const [currentArticle, setCurrentArticle] = useState("");
+  const [currentArticle, setCurrentArticle] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     getArticle(article_id).then((res) => {
       setCurrentArticle(res);
+      setIsLoading(false);
     });
   }, []);
-
-  return (
-    <div>
-      <ArticleDetails article={currentArticle} />
-    </div>
-  );
+  if (isLoading) {
+    return <p className="loading">Loading...</p>;
+  } else
+    return (
+      <div>
+        <ArticleDetails article={currentArticle} />
+      </div>
+    );
 }
 
 export default FullArticle;
