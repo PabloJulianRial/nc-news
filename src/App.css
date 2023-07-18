@@ -4,3 +4,22 @@
   padding: 2rem;
   text-align: center;
 }
+.articles-list{
+  border: 1px solid green;
+}
+.header{
+  border: 1px solid red;
+}
+.App{
+  border: 1px solid black;
+}
+.article-item{
+  border: 1px solid blue;
+
+}
+select { min-height: 20px;
+min-width:150px }
+.article-item img{
+  width: 200px;
+  height: auto;
+}
