@@ -5,6 +5,7 @@ import ArticlesList from "./components/ArticlesList";
 import { Route, Routes } from "react-router-dom";
 import { getArticles } from "./utils";
 import FullArticle from "../src/components/FullArticle";
+import CommentsList from "./components/CommentsList";
 
 function App() {
   const [allArticles, setAllArticles] = useState([]);
@@ -36,6 +37,15 @@ function App() {
             element={<ArticlesList allArticles={allArticles} />}
           />
           <Route path="/articles/:article_id" element={<FullArticle />} />
+          <Route
+            path="/articles/:article_id/comments"
+            element={
+              <>
+                <FullArticle />
+                <CommentsList />
+              </>
+            }
+          />
         </Routes>
       </div>
     );
