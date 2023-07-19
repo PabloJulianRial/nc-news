@@ -17,7 +17,9 @@ export function getArticle(article_id) {
 }
 
 export function getComments(article_id) {
-  return articlesApi.get(`/articles/${article_id}/comments`).then(({ data }) => {
-    return data.comments;
-  });
+  return articlesApi
+    .get(`/articles/${article_id}/comments`)
+    .then(({ data }) => {
+      return data.comments;
+    });
 }

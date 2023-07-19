@@ -14,7 +14,6 @@ function App() {
 
   useEffect(() => {
     getArticles()
-
       .then((response) => {
         setAllArticles(response);
         setIsLoading(false);
@@ -38,7 +37,15 @@ function App() {
             element={<ArticlesList allArticles={allArticles} />}
           />
           <Route path="/articles/:article_id" element={<FullArticle />} />
-          <Route path="/articles/:article_id/comments" element={<CommentsList />} />
+          <Route
+            path="/articles/:article_id/comments"
+            element={
+              <>
+                <FullArticle />
+                <CommentsList />
+              </>
+            }
+          />
         </Routes>
       </div>
     );
