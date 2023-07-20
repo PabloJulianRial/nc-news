@@ -55,3 +55,21 @@ export function voteArticleDown(n, article_id) {
       return data.votes;
     });
 }
+
+export function postComment(newComment, currentAuthor, article_id) {
+  const newCommentBody = {
+    username: currentAuthor,
+    body: newComment,
+  };
+  return articlesApi
+    .post(`/articles/${article_id}/comments`, newCommentBody)
+    .then(({ data }) => {
+      return data;
+    });
+}
+
+export function getUsers() {
+  return articlesApi.get("/users").then(({ data }) => {
+    return data.users;
+  });
+}

@@ -3,11 +3,13 @@ const ArticlePreview = ({ article }) => {
     <article key={article.title} className="article-item">
       <div className="article-line">
         {" "}
-        <p className="label">Title </p>
-        <span>{article.title}</span>
+        <p className="label"> </p>
+        <span>
+          <h2>{article.title}</h2>
+        </span>
       </div>
       <div className="article-line">
-        <p className="label">Topic </p>
+        <p className="label">An article about: </p>
         <span>{article.topic}</span>
       </div>
       <div className="article-line">
