@@ -32,11 +32,17 @@ export function CommentForm({
         setCurrentComments((currentComments) => {
           return [addedComment, ...currentComments];
         });
-        setIsPosted(true);
-      })
-      .catch((err) => {
-        setErrorState(true);
-      });
+        setIsPosted(true)
+        setTimeout(() =>{
+          setIsPosted(false)}, 5000)
+        })
+        
+            .catch((err) => {
+        setErrorState(true)
+        setTimeout(() =>{
+          setErrorState(false)}, 5000)
+        })
+      
     setNewComment("");
   };
 
@@ -60,7 +66,8 @@ export function CommentForm({
         <label htmlFor="current-author">Enter your username</label>
         <select
           onChange={(e) => {
-            setSelectedUser(e.target.value);
+            setSelectedUser(e.target.value)
+            setCurrentAuthor(e.target.value)
           }}
           name="selected-user"
           id="selected-user"
@@ -75,16 +82,7 @@ export function CommentForm({
           })}
         </select>
 
-        <input
-          type="text"
-          className="current-author"
-          id="current-author"
-          cols="40"
-          value={currentAuthor}
-          onChange={(e) => {
-            setCurrentAuthor(e.target.value);
-          }}
-        />
+        
         <br />
         <br />
         <button className="new-comment-btn btn" disabled={!newComment.length}>
@@ -92,7 +90,7 @@ export function CommentForm({
         </button>
       </form>
       {errorState ? (
-        <div className="error">Your comment was not added</div>
+        <div className="error">Your comment was not posted</div>
       ) : null}
       {isPosted ? <div className="success">You posted a comment</div> : null}
     </div>
