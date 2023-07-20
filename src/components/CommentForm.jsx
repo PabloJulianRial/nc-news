@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { postComment } from "../utils";
+import { getUsers } from "../utils";
 
 export function CommentForm({
   newComment,
@@ -10,16 +11,33 @@ export function CommentForm({
   setCurrentComments,
 }) {
   const [isPosted, setIsPosted] = useState(false);
+  const [errorState, setErrorState] = useState(false);
+  const [users, setUsers] = useState([]);
+  const [selectedUser, setSelectedUser] = useState("");
+
+  useEffect(() => {
+    getUsers()
+      .then((response) => {
+        setUsers(response);
+      })
+      .catch((err) => {
+        setErrorState(true);
+      });
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    postComment(newComment, currentAuthor, article_id).then((addedComment) => {
-      console.log(addedComment);
-      setCurrentComments((currentComments) => {
-        return [addedComment, ...currentComments];
+    postComment(newComment, currentAuthor, article_id)
+      .then((addedComment) => {
+        setCurrentComments((currentComments) => {
+          return [addedComment, ...currentComments];
+        });
+        setIsPosted(true);
+      })
+      .catch((err) => {
+        setErrorState(true);
       });
-      setIsPosted(true);
-    });
+    setNewComment("");
   };
 
   return (
@@ -35,12 +53,28 @@ export function CommentForm({
           rows="7"
           value={newComment}
           onChange={(e) => {
-            console.log(setNewComment);
             setNewComment(e.target.value);
           }}
         ></textarea>
         <br />
         <label htmlFor="current-author">Enter your username</label>
+        <select
+          onChange={(e) => {
+            setSelectedUser(e.target.value);
+          }}
+          name="selected-user"
+          id="selected-user"
+        >
+          <option value="none"></option>
+          {users.map((user) => {
+            return (
+              <option key={user.username} value={user.username}>
+                {user.username}
+              </option>
+            );
+          })}
+        </select>
+
         <input
           type="text"
           className="current-author"
@@ -50,11 +84,16 @@ export function CommentForm({
           onChange={(e) => {
             setCurrentAuthor(e.target.value);
           }}
-        />{" "}
+        />
         <br />
         <br />
-        <button className="new-comment-btn btn">Post comment</button>
+        <button className="new-comment-btn btn" disabled={!newComment.length}>
+          Post comment
+        </button>
       </form>
+      {errorState ? (
+        <div className="error">Your comment was not added</div>
+      ) : null}
       {isPosted ? <div className="success">You posted a comment</div> : null}
     </div>
   );

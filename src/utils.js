@@ -67,3 +67,9 @@ export function postComment(newComment, currentAuthor, article_id) {
       return data;
     });
 }
+
+export function getUsers() {
+  return articlesApi.get("/users").then(({ data }) => {
+    return data.users;
+  });
+}
