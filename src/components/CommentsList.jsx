@@ -17,10 +17,7 @@ const CommentsList = () => {
     return <p className="loading">Loading...</p>;
   } else if (currentComments.length === 0) {
     return (
-      <h2>
-        No comments for this article yet 
-        Be the first one to comment!
-      </h2>
+      <h2>No comments for this article yet Be the first one to comment!</h2>
     );
   } else
     return (

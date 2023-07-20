@@ -7,10 +7,12 @@ function FullArticle() {
   const { article_id } = useParams();
   const [currentArticle, setCurrentArticle] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [currentVotes, setCurrentVotes] = useState("");
 
   useEffect(() => {
     getArticle(article_id).then((res) => {
       setCurrentArticle(res);
+      setCurrentVotes(res.votes);
       setIsLoading(false);
     });
   }, []);
@@ -19,7 +21,11 @@ function FullArticle() {
   } else
     return (
       <div>
-        <ArticleDetails article={currentArticle} />
+        <ArticleDetails
+          article={currentArticle}
+          votes={currentVotes}
+          article_id={article_id}
+        />
       </div>
     );
 }

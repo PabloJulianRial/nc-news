@@ -23,3 +23,35 @@ export function getComments(article_id) {
       return data.comments;
     });
 }
+
+export function getVotes(article_id) {
+  return articlesApi.get(`/articles/${article_id}/votes`).then(({ data }) => {
+    return data.votes;
+  });
+}
+
+export function voteArticleUp(n, article_id) {
+  const voteBody = {
+    inc_votes: {
+      inc_votes: n,
+    },
+  };
+  return articlesApi
+    .patch(`/articles/${article_id}`, voteBody)
+    .then(({ data }) => {
+      return data.votes;
+    });
+}
+
+export function voteArticleDown(n, article_id) {
+  const voteBody = {
+    inc_votes: {
+      inc_votes: n,
+    },
+  };
+  return articlesApi
+    .patch(`/articles/${article_id}`, voteBody)
+    .then(({ data }) => {
+      return data.votes;
+    });
+}
