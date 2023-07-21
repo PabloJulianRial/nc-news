@@ -32,17 +32,19 @@ export function CommentForm({
         setCurrentComments((currentComments) => {
           return [addedComment, ...currentComments];
         });
-        setIsPosted(true)
-        setTimeout(() =>{
-          setIsPosted(false)}, 5000)
-        })
-        
-            .catch((err) => {
-        setErrorState(true)
-        setTimeout(() =>{
-          setErrorState(false)}, 5000)
-        })
-      
+        setIsPosted(true);
+        setTimeout(() => {
+          setIsPosted(false);
+        }, 5000);
+      })
+
+      .catch((err) => {
+        setErrorState(true);
+        setTimeout(() => {
+          setErrorState(false);
+        }, 5000);
+      });
+
     setNewComment("");
   };
 
@@ -66,8 +68,8 @@ export function CommentForm({
         <label htmlFor="current-author">Enter your username</label>
         <select
           onChange={(e) => {
-            setSelectedUser(e.target.value)
-            setCurrentAuthor(e.target.value)
+            setSelectedUser(e.target.value);
+            setCurrentAuthor(e.target.value);
           }}
           name="selected-user"
           id="selected-user"
@@ -82,7 +84,6 @@ export function CommentForm({
           })}
         </select>
 
-        
         <br />
         <br />
         <button className="new-comment-btn btn" disabled={!newComment.length}>
