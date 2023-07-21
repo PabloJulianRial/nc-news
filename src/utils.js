@@ -73,3 +73,23 @@ export function getUsers() {
     return data.users;
   });
 }
+
+export function getTopics() {
+  return axios
+    .get("https://nc-news-api-iv8w.onrender.com/api/topics")
+    .then(({ data }) => {
+      return data.topics.map((topic) => {
+        return topic.slug;
+      });
+    });
+}
+
+export function selectArticlesByTopic(allArticles, currentTopic) {
+  return allArticles.filter((article) => {
+    if (currentTopic !== "none") {
+      return article.topic === currentTopic;
+    } else {
+      return allArticles;
+    }
+  });
+}
